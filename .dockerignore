@@ -1,0 +1,29 @@
+# Files and directories to ignore when building the Docker image
+
+# Node.js dependencies
+node_modules
+
+# Development and build artifacts
+dist
+tmp
+out-tsc
+
+# IDE and editor files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# ignore markdown file
+*.md
+
+# other
+.editorconfig
+.gitignore
+.devcontainer
+.angular
+.github
+CREDITS
