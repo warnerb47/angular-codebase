@@ -50,7 +50,6 @@ jobs:
 
     # ssh  Administrator@3.137.200.55 'Expand-Archive -Path $filePath -DestinationPath $destinationPath'
       - name: Unzip dist on remote server
-        shell: pwsh
         run: |
             $destinationPath = 'C:\dist'
             $filePath = 'C:\dist.gz'
