@@ -31,8 +31,8 @@ jobs:
         run: npm run build
             
         
-      - name: Zip dist
-        run: zip dist.zip ./dist/fuse/*'
+      - name: compress dist
+        run: tar -czvf dist.gz ./dist/fuse/*'
 
     #   - name: Deploy to server
     #     run: |
@@ -45,14 +45,14 @@ jobs:
             username: ${{ vars.USERNAME }}
             password: ${{ secrets.PASSWORD }}
             port: ${{ vars.PORT }}
-            source: "dist.zip"
+            source: "dist.gz"
             target: C:\
 
+    # ssh  Administrator@3.137.200.55 'Expand-Archive -Path $filePath -DestinationPath $destinationPath'
       - name: Unzip dist on remote server
         shell: pwsh
         run: |
             $destinationPath = 'C:\dist'
-            $zipFilePath = 'C:\dist.zip'
-            ssh  Administrator@3.137.200.55 'Expand-Archive -Path $zipFilePath -DestinationPath $destinationPath'
-
+            $filePath = 'C:\dist.gz'
+            tar -xvzf $filePath -C $destinationPath
 
