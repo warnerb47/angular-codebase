@@ -51,7 +51,5 @@ jobs:
     # ssh  Administrator@3.137.200.55 'Expand-Archive -Path $filePath -DestinationPath $destinationPath'
       - name: Unzip dist on remote server
         run: |
-            $destinationPath = 'C:\dist'
-            $filePath = 'C:\dist.gz'
-            ssh  Administrator@3.137.200.55 'tar -xvzf C:\dist.gz -C C:\dist'
+            ssh -tt Administrator@3.137.200.55 'pwsh -c  "tar -xvzf C:\dist.gz -C C:\dist"'
 
