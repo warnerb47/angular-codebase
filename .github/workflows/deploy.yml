@@ -30,7 +30,7 @@ jobs:
       - name: Build the Angular app
         run: |
             npm run build
-            zip dist.zip ./dist/*'
+            zip dist.zip ./dist/fuse/*'
 
     #   - name: Deploy to server
     #     run: |
