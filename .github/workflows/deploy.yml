@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - ci-cd
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH keys
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build the Angular app
+        run: npm run build -- --prod
+
+      - name: Deploy to server
+        run: |
+          scp -r -i ${{ secrets.SSH_PRIVATE_KEY }} ./dist/* Administrator@3.137.200.55:C:\\
+
