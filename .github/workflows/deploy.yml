@@ -28,9 +28,11 @@ jobs:
     #       $zipFilePath = 'dist.zip'
     #       Compress-Archive -Path $sourcePath -DestinationPath $zipFilePath
       - name: Build the Angular app
-        run: |
-            npm run build
-            zip dist.zip ./dist/fuse/*'
+        run: npm run build
+            
+        
+      - name: Zip dist
+        run: zip dist.zip ./dist/fuse/*'
 
     #   - name: Deploy to server
     #     run: |
@@ -39,10 +41,10 @@ jobs:
       - name: Deploy to server
         uses: appleboy/scp-action@v0.1.4
         with:
-            host: 3.137.200.55
-            username: Administrator
+            host: ${{ vars.HOST }}
+            username: ${{ vars.USERNAME }}
             password: ${{ secrets.PASSWORD }}
-            port: 22
+            port: ${{ vars.PORT }}
             source: "dist.zip"
             target: C:\
 
