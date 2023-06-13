@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
@@ -21,10 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+        # tar -cvf dist.tar ./dist/
       - name: Build the Angular app
         run: |
             npm run build
-            tar -cvf dist.tar ./dist/
+            $sourcePath = './dist'
+            $zipFilePath = 'dist.zip'
+            Compress-Archive -Path $sourcePath -DestinationPath $zipFilePath
 
     #   - name: Deploy to server
     #     run: |
@@ -39,5 +42,11 @@ jobs:
             port: 22
             source: "dist.tar"
             target: C:\
+
+    #   - name: Unzip dist on remote server
+    #     run: |
+    #         $destinationPath = 'C:\dist'
+    #         $zipFilePath = 'C:\dist.zip'
+    #         ssh  Administrator@3.137.200.55 'Expand-Archive -Path $zipFilePath -DestinationPath $destinationPath'
       
 
