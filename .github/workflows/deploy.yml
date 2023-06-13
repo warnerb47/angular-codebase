@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -22,9 +22,22 @@ jobs:
         run: npm i
 
       - name: Build the Angular app
-        run: npm run build
+        run: |
+            npm run build
+            tar -cvf dist.tar ./dist/
 
     #   - name: Deploy to server
     #     run: |
-    #       scp -r -i ${{ secrets.SSH_PRIVATE_KEY }} ./dist/* Administrator@3.137.200.55:C:\\
+    #         sshpass -p ${{ secrets.PASSWORD }} scp -r -i ${{ secrets.SSH_PRIVATE_KEY }} ./dist.tar Administrator@3.137.200.55:C:\
+
+      - name: Deploy to server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+            host: 3.137.200.55
+            username: Administrator
+            password: ${{ secrets.PASSWORD }}
+            port: 22
+            source: "dist.tar"
+            target: C:\
+      
 
