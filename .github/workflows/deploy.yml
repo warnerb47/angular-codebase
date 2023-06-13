@@ -32,7 +32,7 @@ jobs:
             
         
       - name: compress dist
-        run: tar -czvf dist.gz ./dist/fuse/*'
+        run: tar -czvf dist.gz ./dist/fuse/*
 
     #   - name: Deploy to server
     #     run: |
