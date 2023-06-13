@@ -24,7 +24,7 @@ jobs:
       - name: Build the Angular app
         run: npm run build
 
-      - name: Deploy to server
-        run: |
-          scp -r -i ${{ secrets.SSH_PRIVATE_KEY }} ./dist/* Administrator@3.137.200.55:C:\\
+    #   - name: Deploy to server
+    #     run: |
+    #       scp -r -i ${{ secrets.SSH_PRIVATE_KEY }} ./dist/* Administrator@3.137.200.55:C:\\
 
