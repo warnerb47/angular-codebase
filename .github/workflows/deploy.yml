@@ -22,7 +22,7 @@ jobs:
         run: npm i
 
       - name: Build the Angular app
-        run: npm run build -- --prod
+        run: npm run build
 
       - name: Deploy to server
         run: |
