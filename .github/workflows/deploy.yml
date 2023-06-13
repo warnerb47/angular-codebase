@@ -54,5 +54,5 @@ jobs:
         run: |
             $destinationPath = 'C:\dist'
             $filePath = 'C:\dist.gz'
-            tar -xvzf $filePath -C $destinationPath
+            ssh  Administrator@3.137.200.55 'tar -xvzf $filePath -C $destinationPath'
 
