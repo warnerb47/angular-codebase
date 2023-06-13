@@ -46,10 +46,11 @@ jobs:
             source: "dist.zip"
             target: C:\
 
-    #   - name: Unzip dist on remote server
-    #     run: |
-    #         $destinationPath = 'C:\dist'
-    #         $zipFilePath = 'C:\dist.zip'
-    #         ssh  Administrator@3.137.200.55 'Expand-Archive -Path $zipFilePath -DestinationPath $destinationPath'
-      
+      - name: Unzip dist on remote server
+        shell: pwsh
+        run: |
+            $destinationPath = 'C:\dist'
+            $zipFilePath = 'C:\dist.zip'
+            ssh  Administrator@3.137.200.55 'Expand-Archive -Path $zipFilePath -DestinationPath $destinationPath'
+
 
