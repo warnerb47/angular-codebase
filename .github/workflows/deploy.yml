@@ -51,7 +51,7 @@ jobs:
             username: ${{ vars.USERNAME }}
             password: ${{ secrets.PASSWORD }}
             port: ${{ vars.PORT }}
-            script: tar -xvzf C:\dist.gz -C C:\dist
+            script: tar -xvzf C:\dist.gz -C C:\
 
     # ssh  Administrator@3.137.200.55 'Expand-Archive -Path $filePath -DestinationPath $destinationPath'
       # - name: Unzip dist on remote server
