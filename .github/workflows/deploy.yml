@@ -34,10 +34,6 @@ jobs:
       - name: compress dist
         run: tar -czvf dist.gz ./dist/fuse/*
 
-    #   - name: Deploy to server
-    #     run: |
-    #         sshpass -p ${{ secrets.PASSWORD }} scp -r -i ${{ secrets.SSH_PRIVATE_KEY }} ./dist.tar Administrator@3.137.200.55:C:\
-
       - name: Deploy to server
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -48,8 +44,17 @@ jobs:
             source: "dist.gz"
             target: C:\
 
-    # ssh  Administrator@3.137.200.55 'Expand-Archive -Path $filePath -DestinationPath $destinationPath'
       - name: Unzip dist on remote server
-        run: |
-            ssh -tt ${{ vars.USERNAME }}@${{ vars.HOST }} 'tar -xvzf C:\dist.gz -C C:\dist'
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+            host: ${{ vars.HOST }}
+            username: ${{ vars.USERNAME }}
+            password: ${{ secrets.PASSWORD }}
+            port: ${{ vars.PORT }}
+            script: tar -xvzf C:\dist.gz -C C:\dist
+
+    # ssh  Administrator@3.137.200.55 'Expand-Archive -Path $filePath -DestinationPath $destinationPath'
+      # - name: Unzip dist on remote server
+      #   run: |
+      #       ssh -tt ${{ vars.USERNAME }}@${{ vars.HOST }} 'tar -xvzf C:\dist.gz -C C:\dist'
 
